@@ -1,0 +1,35 @@
+	// TODO: binding
+	document.getElementById(selectFileId).onclick = function() {
+		var getCanvas = document.getElementById(canvasId);
+		var imgData = getCanvas.toDataURL().replace("image/png", "image/octet-stream");
+		document.getElementById('show').src = imgData;
+	}
+
+	// TODO: create new babe img
+	// TODO: binding
+	function uploadimg(){
+		var getCanvas = document.getElementById(idCanvas);
+		var imgData = getCanvas.toDataURL('image/jpeg', 0.5);
+		var _url = 'TODO';
+		var _data = {
+			img: imgData
+		};
+		$.ajax({
+			type: 'POST',
+			url: _url,
+			data: _data,
+			dataType: 'json',
+			success: function(ret) {
+				if (ret.picurl != '') {
+					document.getElementById('show').src = ret.picurl;
+					document.getElementById('upload').innerHTML = '生成图片';
+					document.getElementById('content1').style.display = 'none';
+					document.getElementById('content2').style.display = 'block';
+				} else {
+					// TODO
+					alert('upload fail');
+				}
+			}
+		})
+	}
+
